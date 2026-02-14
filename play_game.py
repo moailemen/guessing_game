@@ -20,5 +20,5 @@ def play_game():
                 break # Exit the loop
         except ValueError:
             print("Invalid input. Please enter a number.")
-if __name__ ==  "__main__":
+if __name__ == "__main__":
     play_game()
