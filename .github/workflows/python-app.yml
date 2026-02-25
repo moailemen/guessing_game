@@ -20,7 +20,7 @@ jobs:
       
     - name: Install dependencies 
       run: |
-        apt install python3-pip python3-venv -y
+        sudo apt install python3-pip python3-venv -y
         python3 -m venv venv_game
         source venv_game/bin/activate
         pip install streamlit
