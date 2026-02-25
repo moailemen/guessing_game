@@ -1,0 +1,38 @@
+
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest #creating a server to run the jobs
+
+    steps:
+    - uses: actions/checkout@v4  #cloning current repository into server e.g gitclone
+    - name: Set up Python 3.10  
+      uses: actions/setup-python@v3  #installing python on server
+      
+    - name: Install dependencies 
+      run: |
+        apt install python3-pip python3-venv -y
+        python3 -m venv venv_game
+        source venv_game/bin/activate
+        pip install streamlit
+        streamlit run play_game.py
+      
+        
+    # - name: Lint with flake8
+    #   run: |
+    #     # stop the build if there are Python syntax errors or undefined names
+    #     flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    #     # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+    #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    # - name: Test with pytest
+    #   run: |
+    #     pytest
