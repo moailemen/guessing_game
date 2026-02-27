@@ -1,12 +1,14 @@
 import streamlit as st
 import random
 
-# --- Game Configuration ---
+
+
 MIN_NUM = 1
 MAX_NUM = 100
 MAX_GUESSES = 7
 
-# --- Session State Initialization ---
+
+
 # Initialize the secret number and number of guesses in session state
 if 'secret_number' not in st.session_state:
     st.session_state.secret_number = random.randint(MIN_NUM, MAX_NUM)
@@ -22,7 +24,7 @@ def restart_game():
     """Resets the game state."""
     st.session_state.secret_number = random.randint(MIN_NUM, MAX_NUM)
     st.session_state.guesses_left = MAX_GUESSES
-    st.session_state.game_message = f"New game started! Guess a number between {MIN_NUM} and {MAX_NUM}. Expected Num = {st.session_state.secret_number}"
+    st.session_state.game_message = f"New game started! Guess a number between {MIN_NUM} and {MAX_NUM}."
     st.session_state.game_over = False
 
 def check_guess(guess):
@@ -38,10 +40,10 @@ def check_guess(guess):
     elif st.session_state.guesses_left <= 0:
         st.session_state.game_message = f"Game over! The number was {st.session_state.secret_number}."
         st.session_state.game_over = True
-    if guess < st.session_state.secret_number:
-        st.session_state.game_message = f"Too low! Try a higher number. Expected Num = {st.session_state.secret_number}"
+    elif guess < st.session_state.secret_number:
+        st.session_state.game_message = "Too low! Try a higher number."
     else:
-        st.session_state.game_message = f"Too high! Try a lower number. Expected Num = {st.session_state.secret_number}"
+        st.session_state.game_message = "Too high! Try a lower number."
 
 # --- App UI ---
 st.title(" Guess the Number Game")
